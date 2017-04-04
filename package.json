@@ -9,6 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "fastclick": "^1.0.6",
     "iview": "^2.0.0-rc.9",
     "vue": "^2.2.2"
   },

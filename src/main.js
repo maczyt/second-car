@@ -5,7 +5,14 @@ import VueRouter from 'vue-router'
 import iView from 'iview'
 import App from './App'
 import router from './router'
+import FastClick from 'fastclick'
 import 'iview/dist/styles/iview.css'
+
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    FastClick.attach(document.body);
+  }, false);
+}
 
 Vue.config.productionTip = false
 Vue.use(iView)
