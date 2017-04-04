@@ -1,28 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <div class="top">宇涛租车</div>
+    <my-nav></my-nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
+import nav from '@/components/nav'
 export default {
   name: 'app',
   components: {
-    Hello
+    'my-nav': nav
+  },
+  created () {
+    this.$router.replace('/home')
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" rel="stylesheet/scss">
+  html, body {font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+  #app {
+    .top {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background-color: rgb(27, 43, 59 );
+      color: #fff;
+      box-shadow: 0 2px 5px #666;
+    }
+  }
 </style>
