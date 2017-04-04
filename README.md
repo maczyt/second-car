@@ -18,6 +18,12 @@ npm run build
 npm run build --report
 ```
 
+## Res
+
+![效果](./static/res/res.gif)
+
+---
+
 ## Thanks 
 
 - [Vue.js](http://vuejs.org/)
