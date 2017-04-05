@@ -1,6 +1,6 @@
 <template>
-  <Carousel>
-    <Carousel-item autoplay>
+  <Carousel autoplay :autoplay-speed="Number(3000)">
+    <Carousel-item>
       <div class="demo-carousel">
         <img src="./banner.jpg" alt="" class="banner-img">
       </div>

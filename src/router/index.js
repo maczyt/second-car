@@ -10,6 +10,9 @@ const forgetPW = r => require.ensure([], () => r(require('@/components/forgetPW'
 const list = r => require.ensure([], () => r(require('@/components/list')), 'list')
 const user = r => require.ensure([], () => r(require('@/components/user')), 'user')
 
+// pages
+const toDoor = r => require.ensure([], () => r(require('@/components/pages/toDoor')), 'to-door')
+
 const server_terms = r => require.ensure([], () => r(require('@/components/serverTerms')), 'server-terms')
 
 const routes = [
@@ -25,6 +28,12 @@ const routes = [
       {
         path: '/home',
         component: home
+      },
+      // pages
+      // 上门取车
+      {
+        path: '/toDoor',
+        component: toDoor
       },
       // 附近门店
       {

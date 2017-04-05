@@ -60,7 +60,7 @@
       },
       handleYzm () {
         var _this = this,
-            time = 10
+            time = 60
         _this.countDown = time --
         this.phone_input = false;
         function cd () {

@@ -5,7 +5,7 @@
     <banner></banner>
     <div class="main">
       <div class="row">
-        <a class="col">
+        <a class="col" href="#toDoor">
           <div class="icon" style="background-color: #edb718;">
             <Icon type="model-s" size="35" color="#fff"></Icon>
           </div>
@@ -28,15 +28,15 @@
         <a class="col">
           <Icon type="social-freebsd-devil" size="35" color="#9cf"></Icon>
           <div class="wrap">
-            <p>上门自取</p>
-            <span class="title">免费就是爽</span>
+            <p>特价套餐</p>
+            <span class="title">超值优惠低至6折</span>
           </div>
         </a>
         <a class="col">
           <Icon type="android-car" size="35" color="#9cf"></Icon>
           <div class="wrap">
-            <p>上门自取</p>
-            <span>免费就是爽</span>
+            <p>顺风车</p>
+            <span>城际自驾百元租</span>
           </div>
         </a>
       </div>
@@ -44,15 +44,15 @@
         <a class="col">
           <Icon type="search" size="35" color="#9cf"></Icon>
           <div class="wrap">
-            <p>上门自取</p>
-            <span>免费就是爽</span>
+            <p>查门店</p>
+            <span>全国千余网点</span>
           </div>
         </a>
         <a class="col">
           <Icon type="navigate" size="35" color="#9cf"></Icon>
           <div class="wrap">
-            <p>上门自取</p>
-            <span>免费就是爽</span>
+            <p>导航</p>
+            <span>导航一下即出发</span>
           </div>
         </a>
       </div>
