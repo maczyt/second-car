@@ -1,10 +1,18 @@
 <template>
   <div>
+    <top title="门店"></top>
+    <my-nav></my-nav>
     <div id="map" style="width:100%;height:750px;"></div>
   </div>
 </template>
 <script>
+  import top from '@/components/top'
+  import nav from '@/components/nav'
   export default {
+    components: {
+      top,
+      'my-nav': nav
+    },
     mounted () {
       var map = new BMap.Map("map");
       var point = new BMap.Point(116.404, 39.915);  // 创建点坐标

@@ -19,8 +19,8 @@
           <Button type="primary" style="width: 100%;" @click="handleSubmit('formItem')">登录</Button>
         </Form-item>
         <Form-item>
-          <Button type="warning">注册会员</Button>
-          <Button type="info" style="float: right;">忘记密码?</Button>
+          <Button type="warning" @click="reg">注册会员</Button>
+          <Button type="info" style="float: right;" @click="forgetPW">忘记密码?</Button>
         </Form-item>
       </Form>
     </div>
@@ -46,6 +46,12 @@
       }
     },
     methods: {
+      reg () {
+        this.$router.replace('/reg')
+      },
+      forgetPW () {
+        this.$router.replace('/forgetPW')
+      },
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {

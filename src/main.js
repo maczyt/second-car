@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import iView from 'iview'
-import App from './App'
 import router from './router'
 import FastClick from 'fastclick'
 import 'iview/dist/styles/iview.css'
@@ -20,8 +19,5 @@ Vue.use(VueRouter)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App },
   router
-})
+}).$mount('#app')

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <top title="宇涛租车"></top>
+    <my-nav></my-nav>
     <banner></banner>
     <div class="main">
       <div class="row">
@@ -59,9 +61,13 @@
 </template>
 <script>
   import banner from '@/components/banner'
+  import nav from '@/components/nav'
+  import top from '@/components/top'
   export default {
     components: {
-      banner
+      banner,
+      'my-nav': nav,
+      top
     }
   }
 </script>
