@@ -6,6 +6,7 @@ import iView from 'iview'
 import router from './router'
 import FastClick from 'fastclick'
 import 'iview/dist/styles/iview.css'
+import store from './store'
 
 window.moment = require('moment')
 window.moment.locale('zh-cn')
@@ -22,5 +23,6 @@ Vue.use(VueRouter)
 
 /* eslint-disable no-new */
 new Vue({
-  router
+  router,
+  store
 }).$mount('#app')

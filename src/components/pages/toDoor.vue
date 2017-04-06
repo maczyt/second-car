@@ -62,10 +62,12 @@
         date_flag: false,
         date_title: '',
         getCar: {
+          time: '',
           t1: '',
           t2: ''
         },
         returnCar: {
+          time: '',
           t1: '',
           t2: ''
         },
@@ -87,21 +89,29 @@
         if (!msg) return
         if (type === '取车时间') {
           var time = moment(msg)
+          this.getCar.time = time.format('LLL')
           this.getCar.t1 = time.format('MM-DD')
           this.getCar.t2 = weekFormat(time.format('dddd')) + ' ' + time.format('HH:mm');
         } else {
           var time = moment(msg)
+          this.returnCar.time = time.format('LLL')
           this.returnCar.t1 = time.format('MM-DD')
           this.returnCar.t2 = weekFormat(time.format('dddd')) + ' ' + time.format('HH:mm');
         }
       },
       toChoose () {
+        var _this = this
+        this.$store.commit('SELECT_CARS', {
+          date: {
+            get: _this.getCar.time,
+            back: _this.returnCar.time
+          }
+        })
         this.$router.push('select-car')
       }
     },
     computed: {
       interval () {
-        this.$Message.error
         var i = hourDis(moment(this.returnCar.t1), moment(this.getCar.t1))
         if (i <= 0) {
           this.$Message.error('爸爸, 请不要这样, 请把还车日调后, 不然我烦死你')
@@ -111,9 +121,11 @@
     },
     mounted () {
       var now = moment()
+      this.getCar.time = now.format('LLL')
       this.getCar.t1 = now.format('MM-DD')
       this.getCar.t2 = weekFormat(now.format('dddd')) + ' ' + now.format('HH:mm');
       var tTomorrow = now.add(2, 'days')
+      this.returnCar.time = tTomorrow.format('LLL')
       this.returnCar.t1 = tTomorrow.format('MM-DD')
       this.returnCar.t2 = weekFormat(tTomorrow.format('dddd')) + ' ' + tTomorrow.format('HH:mm');
 
