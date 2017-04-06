@@ -12,6 +12,7 @@ const user = r => require.ensure([], () => r(require('@/components/user')), 'use
 
 // pages
 const toDoor = r => require.ensure([], () => r(require('@/components/pages/toDoor')), 'to-door')
+const selectCars = r => require.ensure([], () => r(require('@/components/select-cars')), 'select-cars')
 
 const server_terms = r => require.ensure([], () => r(require('@/components/serverTerms')), 'server-terms')
 
@@ -35,6 +36,11 @@ const routes = [
         path: '/toDoor',
         component: toDoor
       },
+      {
+        path: '/select-car',
+        component: selectCars
+      },
+
       // 附近门店
       {
         path: '/near',

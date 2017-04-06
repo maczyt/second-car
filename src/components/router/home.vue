@@ -1,6 +1,6 @@
 <template>
   <div>
-    <top title="宇涛租车"></top>
+    <top :showBack="false" title="宇涛租车"></top>
     <my-nav></my-nav>
     <banner></banner>
     <div class="main">

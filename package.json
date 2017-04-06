@@ -12,7 +12,8 @@
     "fastclick": "^1.0.6",
     "iview": "^2.0.0-rc.9",
     "moment": "^2.18.1",
-    "vue": "^2.2.2"
+    "vue": "^2.2.2",
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

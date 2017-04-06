@@ -1,6 +1,6 @@
 <template>
   <div class="toDoor">
-    <top title="上门送取车"></top>
+    <top :showBack="false" title="上门送取车"></top>
     <div class="main">
       <div class="startPos item">
         <div class="select">
@@ -33,18 +33,18 @@
       <div class="time item">
         <a class="start" @click="handleDate('取车时间')">
           <span class="title">取车</span>
-          <time class="t1">04-06</time>
-          <time class="t2">周四 08:30</time>
+          <time class="t1">{{ getCar.t1 || '04-05' }}</time>
+          <time class="t2">{{ getCar.t2 || '周四 08:30' }}</time>
         </a><div class="interval">
-          <span>2</span>
+          <span>{{ interval }}</span>
           <span>天</span>
         </div><a class="end" @click="handleDate('还车时间')">
           <span class="title">还车</span>
-          <time class="t1">04-06</time>
-          <time class="t2">周四 08:30</time>
+          <time class="t1">{{ returnCar.t1 || '04-05' }}</time>
+          <time class="t2">{{ returnCar.t2 || '周四 08:30' }}</time>
         </a>
       </div>
-      <Button long type="warning">去选车</Button>
+      <Button long type="warning" @click="toChoose">去选车</Button>
       <transition name="date-fade">
         <date v-show="date_flag" :title="date_title" @from-child-msg="listenChildMsg"></date>
       </transition>
@@ -55,6 +55,7 @@
 <script>
   import top from '@/components/top'
   import date from '@/components/common/date'
+  import { weekFormat, hourDis } from '@/lib/utils'
   export default {
     data () {
       return {
@@ -85,12 +86,37 @@
         this.date_flag = false
         if (!msg) return
         if (type === '取车时间') {
-
+          var time = moment(msg)
+          this.getCar.t1 = time.format('MM-DD')
+          this.getCar.t2 = weekFormat(time.format('dddd')) + ' ' + time.format('HH:mm');
+        } else {
+          var time = moment(msg)
+          this.returnCar.t1 = time.format('MM-DD')
+          this.returnCar.t2 = weekFormat(time.format('dddd')) + ' ' + time.format('HH:mm');
         }
-        console.log(msg)
+      },
+      toChoose () {
+        this.$router.push('select-car')
+      }
+    },
+    computed: {
+      interval () {
+        this.$Message.error
+        var i = hourDis(moment(this.returnCar.t1), moment(this.getCar.t1))
+        if (i <= 0) {
+          this.$Message.error('爸爸, 请不要这样, 请把还车日调后, 不然我烦死你')
+        }
+        return i
       }
     },
     mounted () {
+      var now = moment()
+      this.getCar.t1 = now.format('MM-DD')
+      this.getCar.t2 = weekFormat(now.format('dddd')) + ' ' + now.format('HH:mm');
+      var tTomorrow = now.add(2, 'days')
+      this.returnCar.t1 = tTomorrow.format('MM-DD')
+      this.returnCar.t2 = weekFormat(tTomorrow.format('dddd')) + ' ' + tTomorrow.format('HH:mm');
+
       var map = new BMap.Map("map");
       var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
       map.centerAndZoom(point, 15);

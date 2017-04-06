@@ -1,6 +1,6 @@
 <template>
   <div>
-    <top title="门店"></top>
+    <top :showBack="false" title="门店"></top>
     <my-nav></my-nav>
     <div id="map" style="width:100%;height:750px;"></div>
   </div>

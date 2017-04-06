@@ -7,6 +7,9 @@ import router from './router'
 import FastClick from 'fastclick'
 import 'iview/dist/styles/iview.css'
 
+window.moment = require('moment')
+window.moment.locale('zh-cn')
+
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);
