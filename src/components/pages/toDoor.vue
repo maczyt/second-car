@@ -89,12 +89,12 @@
         if (!msg) return
         if (type === '取车时间') {
           var time = moment(msg)
-          this.getCar.time = time.format('LLL')
+          this.getCar.time = time
           this.getCar.t1 = time.format('MM-DD')
           this.getCar.t2 = weekFormat(time.format('dddd')) + ' ' + time.format('HH:mm');
         } else {
           var time = moment(msg)
-          this.returnCar.time = time.format('LLL')
+          this.returnCar.time = time
           this.returnCar.t1 = time.format('MM-DD')
           this.returnCar.t2 = weekFormat(time.format('dddd')) + ' ' + time.format('HH:mm');
         }
@@ -112,23 +112,25 @@
     },
     computed: {
       interval () {
-        var i = hourDis(moment(this.returnCar.t1), moment(this.getCar.t1))
-        if (i <= 0) {
+        var hour = hourDis(moment(this.returnCar.time), moment(this.getCar.time))
+        if (hour <= 0) {
           this.$Message.error('爸爸, 请不要这样, 请把还车日调后, 不然我烦死你')
         }
-        return i
+        hour = hour > 0 ? Math.ceil(hour / 24): Math.floor(hour / 24)
+        return hour
       }
     },
-    mounted () {
+    created () {
       var now = moment()
-      this.getCar.time = now.format('LLL')
+      var tTomorrow = moment().add(2, 'days')
+      this.getCar.time = now
       this.getCar.t1 = now.format('MM-DD')
       this.getCar.t2 = weekFormat(now.format('dddd')) + ' ' + now.format('HH:mm');
-      var tTomorrow = now.add(2, 'days')
-      this.returnCar.time = tTomorrow.format('LLL')
+      this.returnCar.time = tTomorrow
       this.returnCar.t1 = tTomorrow.format('MM-DD')
       this.returnCar.t2 = weekFormat(tTomorrow.format('dddd')) + ' ' + tTomorrow.format('HH:mm');
-
+    },
+    mounted () {
       var map = new BMap.Map("map");
       var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
       map.centerAndZoom(point, 15);

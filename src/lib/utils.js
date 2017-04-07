@@ -5,5 +5,5 @@ export const weekFormat = (w) => {
 };
 
 export const hourDis = (d1, d2) => {
-  return (d1 - d2) / (1000 * 60 * 60 * 24)
+  return (d1 - d2) / (1000 * 60 * 60)
 };
