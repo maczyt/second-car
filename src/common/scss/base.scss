@@ -1,0 +1,40 @@
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-radio: 1.5) {
+	.border-1px-bottom {
+		&:after {
+			-webkit-transform: scaleY(0.7);
+			transform: scaleY(0.7);
+		}
+	}
+  .border-1px-top {
+    &:before {
+      -webkit-transform: scaleY(0.7);
+      transform: scaleY(0.7);
+    }
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-radio: 2) {
+	.border-1px-bottom {
+		&:after {
+			-webkit-transform: scaleY(.5);
+			transform: scaleY(.5);
+		}
+	}
+  .border-1px-top {
+    &:before {
+      -webkit-transform: scaleY(.5);
+      transform: scaleY(.5);
+    }
+  }
+}
+
+.clearfix {
+	&:after {
+		display: block;
+		height: 0;
+		line-height: 0;
+		clear: both;
+		visibility: hidden;
+		content: '';
+	}
+}

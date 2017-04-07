@@ -4,6 +4,6 @@ import {
 
 export default {
   [SELECT_CARS] (state, payload) {
-    console.log(payload)
+    // console.log(payload)
   }
 }

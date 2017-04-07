@@ -1,13 +1,32 @@
 <template>
-  <div class="select-car">
-    <top :showBack="true" title="选择车型"></top>
-    <div class="marquee">
-      <div class="wrap">
-        <p>世界上一成不变的东西，只有“任何事物都是在不断变化的”这条真理。</p>
+  <div>
+    <Spin fix v-show="!loading">
+      <Icon type="load-c" size="30" class="spin-icon-load"></Icon>
+      <div>Loading</div>
+    </Spin>
+    <div class="select-car" v-show="loading">
+      <top :showBack="true" title="选择车型"></top>
+      <div class="marquee">
+        <div class="wrap">
+          <p>世界上一成不变的东西，只有“任何事物都是在不断变化的”这条真理。</p>
+        </div>
       </div>
-    </div>
-    <div class="cars">
-      <div class="t"></div>
+      <div class="cars">
+        <ul>
+          <li v-for="car in cars" class="car">
+            <img :src="'http://192.168.0.5:3000/img/' + car.imgSrc" alt="">
+            <div class="wrap">
+              <div class="title">
+                <h2>{{ car.name }}</h2>
+                <p>{{ car.detail.size }} | {{ car.detail.num }} | {{ car.detail.people }}</p>
+              </div>
+              <div class="money">
+                <div>￥<span>{{ car.money }}</span></div>/日均
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -15,31 +34,42 @@
 <script>
   import top from '@/components/top'
   export default {
+    data () {
+      return {
+        loading: false,
+        cars: []
+      }
+    },
     components: {
       top
+    },
+    created () {
+      this.$http.get('http://192.168.0.5:3000/cars')
+        .then(response => {
+          this.cars = response.body
+          this.loading = true
+        })
+        .catch(err => { this.$Message.error('数据请求失败'); setTimeout(() => { this.$router.go(-1); }, 2000) })
     }
   }
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../../common/scss/mixins";
   @keyframes marquee {
-    0% {
-      left: 150%;
+    from {
+      transform: translate3d(100%, 0, 0);
     }
-    20% {
-      left: 90%;
+    to {
+      transform: translate3d(-130%, 0, 0);
     }
-    40% {
-      left: 30%;
-    }
-    60% {
-      left: -30%;
-    }
-    80% {
-      left: -90%;
-    }
-    100% {
-      left: -150%;
-    }
+  }
+  .spin-icon-load{
+    animation: ani-spin 1s linear infinite;
+  }
+  @keyframes ani-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
   }
   .select-car {
     background-color: #eee;
@@ -59,9 +89,7 @@
         overflow: hidden;
         height: 100%;
         p {
-          position: absolute;
-          left: 100%;
-          animation: marquee 9s infinite;
+          animation: marquee linear 10s 1s infinite;
           white-space: nowrap;
         }
       }
@@ -69,10 +97,56 @@
     .cars {
       flex: 1;
       overflow-y: auto;
-      .t {
-        height: 2000px
+      ul {
+        display: block;
+      }
+      li {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 0;
+        padding: 7px 0;
+        background-color: #fff;
+        @include border-1px-top(#aaa);
+        @include border-1px-bottom(#aaa);
+        &:active {
+          background-color: #999;
+          color: #fff;
+        }
+        & > img {
+          width: 120px;
+          height: 75px;
+          margin-left: 10px;
+        }
+        .wrap {
+          margin-left: 10px;
+          flex: 1;
+          .title {
+            @include border-1px-bottom(#aaa);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            h2 {
+              font-size: 16px;
+              font-weight: bold;
+            }
+            p {
+              font-size: 12px;
+            }
+          }
+          .money {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            & > div {
+              color: #edb718;
+            }
+            span {
+              font-size: 20px;
+            }
+          }
+        }
       }
     }
-
   }
 </style>

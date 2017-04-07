@@ -116,7 +116,8 @@
         if (hour <= 0) {
           this.$Message.error('爸爸, 请不要这样, 请把还车日调后, 不然我烦死你')
         }
-        hour = hour > 0 ? Math.ceil(hour / 24): Math.floor(hour / 24)
+        hour = (hour / 24).toFixed(1)
+        hour = hour > 0 ? Math.ceil(hour): Math.floor(hour)
         return hour
       }
     },

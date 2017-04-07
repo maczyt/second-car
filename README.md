@@ -1,6 +1,8 @@
 # second-car
 
-> 毕业设计
+> 毕业设计, 汽车租赁平台
+> 
+> SPA
 
 ## Build Setup
 
@@ -13,12 +15,17 @@ npm run dev
 
 # build for production with minification
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
 ## Res
+
+### 页面
+
+![home](./static/res/home.png)
+![near](./static/res/near.png)
+![login](./static/res/login.png)
+
+### 交互
 
 ![效果](./static/res/res.gif)
 
