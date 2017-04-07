@@ -44,5 +44,20 @@
       "money": "139",
       "explain": ["special"]
     }
+  ],
+  "users": [
+    {
+      "mobile": "13750840862",
+      "password": "123456",
+      "list": {
+        "all": [],
+        "deal": [],
+        "wait": [],
+        "success": [],
+        "ing": [],
+        "finish": [],
+        "cancel": []
+      }
+    }
   ]
 }

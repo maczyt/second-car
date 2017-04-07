@@ -27,6 +27,16 @@
           </li>
         </ul>
       </div>
+      <div class="sort" @click="handleSort">
+        <div v-if="!sort">
+          <Icon type="arrow-up-a"></Icon>
+          价格由低到高
+        </div>
+        <div v-else>
+          <Icon type="arrow-down-a"></Icon>
+          价格由高到低
+        </div>
+      </div>
     </div>
   </div>
 
@@ -37,7 +47,8 @@
     data () {
       return {
         loading: false,
-        cars: []
+        cars: [],
+        sort: false // 由低到高: false, 由高到低: true
       }
     },
     components: {
@@ -46,10 +57,18 @@
     created () {
       this.$http.get('http://192.168.0.5:3000/cars')
         .then(response => {
-          this.cars = response.body
+          this.cars = response.body.sort(function (a, b) {
+            return +a.money - +b.money
+          });
           this.loading = true
         })
         .catch(err => { this.$Message.error('数据请求失败'); setTimeout(() => { this.$router.go(-1); }, 2000) })
+    },
+    methods: {
+      handleSort () {
+        this.sort = !this.sort
+        this.cars = this.cars.reverse()
+      }
     }
   }
 </script>
@@ -146,6 +165,17 @@
             }
           }
         }
+      }
+    }
+    .sort {
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      font-size: 16px;
+      background-color: #1b2b3b;
+      color: #fff;
+      &:active {
+        background-color: darkslateblue;
       }
     }
   }

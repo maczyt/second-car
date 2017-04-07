@@ -7,3 +7,7 @@ export const weekFormat = (w) => {
 export const hourDis = (d1, d2) => {
   return (d1 - d2) / (1000 * 60 * 60)
 };
+
+export const indOfArr = (data, array) => {
+  return array.indexOf(data)
+};
