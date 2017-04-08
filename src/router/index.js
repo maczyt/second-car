@@ -9,6 +9,7 @@ const forgetPW = r => require.ensure([], () => r(require('@/components/forgetPW'
 
 const list = r => require.ensure([], () => r(require('@/components/list')), 'list')
 const user = r => require.ensure([], () => r(require('@/components/user')), 'user')
+const toAuth = r => require.ensure([], () => r(require('@/components/user/auth')), 'toAuth')
 
 // pages
 const toDoor = r => require.ensure([], () => r(require('@/components/pages/toDoor')), 'to-door')
@@ -55,6 +56,11 @@ const routes = [
       {
         path: '/user',
         component: user
+      },
+      // 实名认证
+      {
+        path: '/toAuth',
+        component: toAuth
       },
       // 登录
       {

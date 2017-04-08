@@ -4,7 +4,7 @@
     <my-nav></my-nav>
     <div class="wrap">
       <section class="sec1">
-        <div>
+        <div @click="toAuth">
           <Icon type="card" size="20"></Icon>
           <span>实名认证</span>
         </div>
@@ -33,6 +33,11 @@
   import top from '@/components/top'
   import nav from '@/components/nav'
   export default {
+    methods: {
+      toAuth () {
+        this.$router.push('toAuth')
+      }
+    },
     components: {
       top,
       'my-nav': nav

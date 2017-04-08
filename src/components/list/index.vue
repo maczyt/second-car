@@ -36,10 +36,11 @@
   export default {
     data () {
       return {
-        getListed: false,
-        selectList: false,
-        selected: false,
-        selectType: '全部',
+        getListed: false, // 加载订单是否完成
+        selectList: false, // 订单类型列表
+        selected: false, // 是否点击切换类型
+        selectTypeEn: 'all',
+        selectType: '全部', // 订单类型
         listTypeEn: ['all', 'deal', 'wait', 'success', 'ing', 'finish', 'cancel'],
         listType: ['全部', '处理中', '待付款', '预订成功', '租赁中', '已完成', '已取消'],
         list: {},
@@ -52,16 +53,31 @@
         this.selected = !this.selected
       },
       changeSelect (ind) {
-        this.selectType = this.listType[ind]
+        var newType = this.listType[ind]
+        if (newType !== this.selectType) {
+          this.getListed = false
+          this.selectType = newType
+          this.selectTypeEn = this.listTypeEn[indOfArr(newType, this.listType)]
+          this.getList()
+        }
         this.selectList = !this.selectList
         this.selected = !this.selected
+      },
+      getList () {
+        this.$http.get(`http://192.168.0.5:3000/list/${this.selectTypeEn}`)
+          .then(response => {
+            this.listData = response.body
+            this.getListed = true
+          })
+          .catch(err => {
+            this.$Message.error(err.message)
+          })
       }
     },
     created () {
-      this.$http.get('http://192.168.0.5:3000/users/user/1')
+      this.$http.get(`http://192.168.0.5:3000/list/${this.selectTypeEn}`)
         .then(response => {
-          this.list = response.body.list
-          this.listData = this.list[this.listTypeEn[indOfArr(this.selectType, this.listType)]]
+          this.listData = response.body
           this.getListed = true
         })
         .catch(err => {
