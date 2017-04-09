@@ -1,11 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var data = require('../data.json');
-
 router.get('/:mobile', function (req, res) {
   var mobile = req.params.mobile;
-  var user = data.users.filter((user) => {
+  var user = req.db.getCollection('users').find({}).filter((user) => {
     if (user.mobile === mobile) return user
   })[0];
   if (user) res.status(200).send(user)
