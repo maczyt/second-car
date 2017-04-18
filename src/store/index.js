@@ -16,7 +16,9 @@ const state = {
       get: '', // 取车
       back: '' // 还车
     }
-  }
+  },
+  check: false, // 是否登录
+  userInfo: {} // 用户信息
 }
 
 export default new Vuex.Store({

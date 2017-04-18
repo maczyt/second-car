@@ -41,6 +41,12 @@
     components: {
       top,
       'my-nav': nav
+    },
+    created () {
+      if (!this.$store.getters.getCheck) {
+        // 用户未登录
+        this.$router.push('login')
+      }
     }
   }
 </script>

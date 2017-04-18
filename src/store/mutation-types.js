@@ -1,1 +1,3 @@
 export const SELECT_CARS = 'SELECT_CARS'
+export const RECORD_USERINFO = 'RECORD_USERINFO'
+export const CHECK_LOGIN = 'CHECK_LOGIN'

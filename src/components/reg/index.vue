@@ -41,6 +41,7 @@
   </div>
 </template>
 <script>
+  import { setStore } from '@/config/utils'
   export default {
     data () {
       return {
@@ -76,14 +77,25 @@
         }
         cd();
       },
-      handleSubmit(name) {
-        /*this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
-          }
-        })*/
+      handleSubmit() {
+        var data = {
+          mobile: this.formItem.phone,
+          pw: this.formItem.password,
+          pw2: this.formItem.rePw,
+          yzm: this.formItem.yzm
+        };
+        this.$http.post('http://localhost:8090/signup', data)
+          .then(res => {
+            var user = res.body;
+            this.$Message.success('注册成功！');
+            this.$store.commit('RECORD_USERINFO', user);
+            this.$store.commit('CHECK_LOGIN', true);
+            setStore('user', user);
+            setTimeout(() => { this.$router.go(-1) })
+          })
+          .catch(err => {
+            this.$Message.error(err.message);
+          });
       }
     }
   }

@@ -6,12 +6,12 @@
       </div>
       <Form ref="formItem" :model="formItem" :rules="rule">
         <Form-item prop="user">
-          <Input type="text" v-model="formItem.phone" placeholder="Username">
+          <Input type="text" v-model="formItem.phone" placeholder="手机号码">
           <Icon type="iphone" slot="prepend"></Icon>
           </Input>
         </Form-item>
         <Form-item prop="password">
-          <Input type="password" v-model="formItem.password" placeholder="Password">
+          <Input type="password" v-model="formItem.password" placeholder="密码">
           <Icon type="ios-locked-outline" slot="prepend"></Icon>
           </Input>
         </Form-item>
@@ -36,7 +36,7 @@
         },
         rule: {
           user: [
-            { required: true, message: '请填写用户名', trigger: 'blur' }
+            { required: true, message: '请填写手机号码', trigger: 'blur' }
           ],
           password: [
             { required: true, message: '请填写密码', trigger: 'blur' },
