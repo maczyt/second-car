@@ -40,13 +40,13 @@
     </Form>
   </div>
 </template>
-<script>
-  import { setStore } from '@/config/utils'
+<script type="text/ecmascript-6">
+  import { setStore, getStore } from '@/config/utils'
   export default {
     data () {
       return {
         phone_input: false,
-        countDown: '',
+        countDown: 0,
         formItem: {
           phone: '',
           yzm: '',
@@ -57,21 +57,24 @@
     },
     methods: {
       handlePhone () {
-        this.phone_input = /^1[0-9]{10}$/.test(this.formItem.phone)
+        this.phone_input = /^1[0-9]{10}$/.test(this.formItem.phone) && this.countDown === 0
       },
       handleYzm () {
-        var _this = this,
-            time = 60
-        _this.countDown = time --
+        var _this = this
+        _this.countDown = 9
         this.phone_input = false;
+
+        this.$http.post('http://localhost:8090/vertify', { mobile: this.formItem.phone })
+          .then(res => { console.log(res.body) })
+
         function cd () {
           setTimeout(function () {
-            _this.countDown = time --
-            if (time > 0) {
+            _this.countDown --
+            if (_this.countDown > 0) {
               cd();
             } else {
               _this.phone_input = true;
-              _this.countDown = ''
+              _this.countDown = 0
             }
           }, 1000)
         }
@@ -86,16 +89,19 @@
         };
         this.$http.post('http://localhost:8090/signup', data)
           .then(res => {
-            var user = res.body;
-            this.$Message.success('注册成功！');
-            this.$store.commit('RECORD_USERINFO', user);
-            this.$store.commit('CHECK_LOGIN', true);
-            setStore('user', user);
-            setTimeout(() => { this.$router.go(-1) })
+            var json = res.body;
+            if (json.status) {
+              this.$Message.success(json.msg);
+              this.$store.commit('RECORD_USERINFO', json.user);
+              this.$store.commit('CHECK_LOGIN', true);
+              setStore('user', json.user);
+              setTimeout(() => { this.$router.go(-1) }, 1000)
+            } else {
+              this.$Message.error(json.msg);
+            }
+          }, err => {
+            this.$Message.error(err.body.msg);
           })
-          .catch(err => {
-            this.$Message.error(err.message);
-          });
       }
     }
   }

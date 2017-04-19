@@ -24,7 +24,7 @@
         </div>
       </section>
       <section class="sec3">
-        退出登录
+        <a href="javascript:">退出登录</a>
       </section>
     </div>
   </div>
@@ -36,6 +36,9 @@
     methods: {
       toAuth () {
         this.$router.push('toAuth')
+      },
+      logout () {
+//        this.$http.get();
       }
     },
     components: {

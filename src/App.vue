@@ -11,7 +11,7 @@ export default {
     'my-nav': nav
   },
   mounted () {
-    if (getStore(user)) {
+    if (getStore('user')) {
       this.$store.commit('CHECK_LOGIN', true);
     }
   }
