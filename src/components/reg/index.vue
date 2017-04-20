@@ -61,7 +61,7 @@
       },
       handleYzm () {
         var _this = this
-        _this.countDown = 9
+        _this.countDown = 59
         this.phone_input = false;
 
         this.$http.post('http://localhost:8090/vertify', { mobile: this.formItem.phone })
