@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-  import { setStore } from '@/config/utils'
+  import { setStore, server } from '@/config/utils'
   export default {
     data () {
       return {
@@ -49,7 +49,7 @@
           mobile: this.formItem.phone,
           password: this.formItem.password
         };
-        this.$http.post('http://localhost:8090/signin', user)
+        this.$http.post(`${server}/signin`, user)
           .then(res => {
             var json = res.body;
             if (json.status) {

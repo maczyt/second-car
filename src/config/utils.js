@@ -28,3 +28,5 @@ export const removeStore = name => {
   if (!name) return;
   return window.localStorage.removeItem(name);
 }
+
+export const server = 'http://cnnba.win:8090'

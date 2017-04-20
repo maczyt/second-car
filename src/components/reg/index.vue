@@ -41,7 +41,7 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import { setStore, getStore } from '@/config/utils'
+  import { setStore, getStore, server } from '@/config/utils'
   export default {
     data () {
       return {
@@ -64,7 +64,7 @@
         _this.countDown = 59
         this.phone_input = false;
 
-        this.$http.post('http://localhost:8090/vertify', { mobile: this.formItem.phone })
+        this.$http.post(`${server}/vertify`, { mobile: this.formItem.phone })
           .then(res => { if (res.body && res.body.status) this.$Message.error(res.body.msg);  else console.log(res.body) })
 
         function cd () {
@@ -87,7 +87,7 @@
           pw2: this.formItem.rePw,
           yzm: this.formItem.yzm
         };
-        this.$http.post('http://localhost:8090/signup', data)
+        this.$http.post(`${server}/signup`, data)
           .then(res => {
             var json = res.body;
             if (json.status) {

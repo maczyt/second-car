@@ -43,6 +43,7 @@
 </template>
 <script>
   import top from '@/components/top'
+  import { server } from '@/config/utils'
   export default {
     data () {
       return {
@@ -55,7 +56,7 @@
       top
     },
     created () {
-      this.$http.post('http://localhost:8090/cars', {})
+      this.$http.post(`${server}/cars`, {})
         .then(response => {
           this.cars = response.body.sort(function (a, b) {
             return +a.money - +b.money

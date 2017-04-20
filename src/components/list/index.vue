@@ -33,6 +33,7 @@
 <script>
   import nav from '@/components/nav'
   import { indOfArr } from '@/lib/utils'
+  import { server } from '@/config/utils'
   export default {
     data () {
       return {
@@ -64,7 +65,7 @@
         this.selected = !this.selected
       },
       getList () {
-        this.$http.get(`http://192.168.0.5:3000/list/${this.selectTypeEn}`)
+        this.$http.get(`${server}/list/${this.selectTypeEn}`)
           .then(response => {
             this.listData = response.body
             this.getListed = true
@@ -75,7 +76,7 @@
       }
     },
     created () {
-      this.$http.get(`http://192.168.0.5:3000/list/${this.selectTypeEn}`)
+      this.$http.get(`${server}/list/${this.selectTypeEn}`)
         .then(response => {
           this.listData = response.body
           this.getListed = true
