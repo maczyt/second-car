@@ -24,7 +24,7 @@
         </div>
       </section>
       <section class="sec3">
-        <a href="javascript:">退出登录</a>
+        <a href="javascript:" @click="logout">退出登录</a>
       </section>
     </div>
   </div>
@@ -32,13 +32,17 @@
 <script>
   import top from '@/components/top'
   import nav from '@/components/nav'
+  import { getStore, removeStore } from '@/config/utils'
   export default {
     methods: {
       toAuth () {
         this.$router.push('toAuth')
       },
       logout () {
-//        this.$http.get();
+        // 不请求，直接前台处理
+        removeStore('user');
+        this.$store.commit('CHECK_LOGIN', false);
+        this.$router.go(-1);
       }
     },
     components: {
@@ -46,6 +50,9 @@
       'my-nav': nav
     },
     created () {
+      if (getStore('user')) {
+        this.$store.commit('CHECK_LOGIN', true)
+      }
       if (!this.$store.getters.getCheck) {
         // 用户未登录
         this.$router.push('login')

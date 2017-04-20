@@ -65,7 +65,7 @@
         this.phone_input = false;
 
         this.$http.post('http://localhost:8090/vertify', { mobile: this.formItem.phone })
-          .then(res => { console.log(res.body) })
+          .then(res => { if (res.body && res.body.status) this.$Message.error(res.body.msg);  else console.log(res.body) })
 
         function cd () {
           setTimeout(function () {

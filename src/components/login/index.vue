@@ -4,7 +4,7 @@
       <div class="logo">
         <Icon type="model-s" size="50" color="#fff"></Icon>
       </div>
-      <Form ref="formItem" :model="formItem" :rules="rule">
+      <Form :model="formItem">
         <Form-item prop="user">
           <Input type="text" v-model="formItem.phone" placeholder="手机号码">
           <Icon type="iphone" slot="prepend"></Icon>
@@ -16,7 +16,7 @@
           </Input>
         </Form-item>
         <Form-item>
-          <Button type="primary" style="width: 100%;" @click="handleSubmit('formItem')">登录</Button>
+          <Button type="primary" style="width: 100%;" @click="handleSubmit">登录</Button>
         </Form-item>
         <Form-item>
           <Button type="warning" @click="reg">注册会员</Button>
@@ -27,21 +27,13 @@
   </div>
 </template>
 <script>
+  import { setStore } from '@/config/utils'
   export default {
     data () {
       return {
         formItem: {
           phone: '',
           password: ''
-        },
-        rule: {
-          user: [
-            { required: true, message: '请填写手机号码', trigger: 'blur' }
-          ],
-          password: [
-            { required: true, message: '请填写密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
-          ]
         }
       }
     },
@@ -53,13 +45,23 @@
         this.$router.replace('/forgetPW')
       },
       handleSubmit(name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
-          }
-        })
+        var user = {
+          mobile: this.formItem.phone,
+          password: this.formItem.password
+        };
+        this.$http.post('http://localhost:8090/signin', user)
+          .then(res => {
+            var json = res.body;
+            if (json.status) {
+              this.$Message.success(json.msg);
+              this.$store.commit('RECORD_USERINFO', json.user);
+              this.$store.commit('CHECK_LOGIN', true);
+              setStore('user', json.user);
+              setTimeout(() => { this.$router.go(-1) }, 1000)
+            } else {
+              this.$Message.error(json.msg);
+            }
+          })
       }
     }
   }

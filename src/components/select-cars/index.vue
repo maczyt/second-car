@@ -14,7 +14,7 @@
       <div class="cars">
         <ul>
           <li v-for="car in cars" class="car">
-            <img :src="'http://192.168.0.5:3000/img/' + car.imgSrc" alt="">
+            <img :src="'http://localhost:8090/img/' + car.src" alt="">
             <div class="wrap">
               <div class="title">
                 <h2>{{ car.name }}</h2>
@@ -55,7 +55,7 @@
       top
     },
     created () {
-      this.$http.get('http://192.168.0.5:3000/cars')
+      this.$http.post('http://localhost:8090/cars', {})
         .then(response => {
           this.cars = response.body.sort(function (a, b) {
             return +a.money - +b.money
