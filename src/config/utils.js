@@ -30,3 +30,5 @@ export const removeStore = name => {
 }
 
 export const server = 'http://cnnba.win:8090'
+
+// export const server = 'http://localhost:8090'

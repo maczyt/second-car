@@ -55,13 +55,7 @@
     },
     methods: {
       handleSubmit(name) {
-        this.$refs[name].validate((valid) => {
-          if (valid) {
-            this.$Message.success('提交成功!');
-          } else {
-            this.$Message.error('表单验证失败!');
-          }
-        })
+        this.$refs[name].validate()
       }
     }
   }

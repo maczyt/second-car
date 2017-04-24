@@ -6,6 +6,7 @@ const near = r => require.ensure([], () => r(require('@/components/router/near')
 const login = r => require.ensure([], () => r(require('@/components/login')), 'login')
 const reg = r => require.ensure([], () => r(require('@/components/reg')), 'reg')
 const forgetPW = r => require.ensure([], () => r(require('@/components/forgetPW')), 'forget-password')
+const doorList = r => require.ensure([], () => r(require('@/components/door-list')), 'door-list')
 
 const list = r => require.ensure([], () => r(require('@/components/list')), 'list')
 const user = r => require.ensure([], () => r(require('@/components/user')), 'user')
@@ -76,6 +77,11 @@ const routes = [
       {
         path: '/forgetPW',
         component: forgetPW
+      },
+      // 门店列表
+      {
+        path: '/door-list',
+        component: doorList
       },
       // 服务条款
       {

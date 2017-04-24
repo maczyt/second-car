@@ -14,7 +14,7 @@
       <div class="cars">
         <ul>
           <li v-for="car in cars" class="car">
-            <img :src="'http://localhost:8090/img/' + car.src" alt="">
+            <img :src="server + '/img/' + car.src" alt="">
             <div class="wrap">
               <div class="title">
                 <h2>{{ car.name }}</h2>
@@ -49,7 +49,8 @@
       return {
         loading: false,
         cars: [],
-        sort: false // 由低到高: false, 由高到低: true
+        sort: false, // 由低到高: false, 由高到低: true
+        server: server
       }
     },
     components: {

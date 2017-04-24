@@ -19,15 +19,7 @@ npm run build
 
 ## Res
 
-### 页面
-
-![home](./static/res/home.png)
-![near](./static/res/near.png)
-![login](./static/res/login.png)
-
-### 交互
-
-![效果](./static/res/res.gif)
+[Click Me](http://cnnba.win:8080)
 
 ---
 
